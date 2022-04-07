@@ -1,0 +1,306 @@
+{
+  "name": "SpaCE2022",
+  "version": "2203030",
+  "versions": {
+    "清洗": "2203030",
+    "第1期": "2203021v1",
+    "第2期": null,
+    "第3期": null,
+    "精标": null
+  },
+  "using": "第1期",
+  "清洗": {
+    "startStep": "start",
+    "endStep": "end",
+    "steps": {
+      "end": {
+        "ref": "end",
+        "name": "标注结果",
+        "mode": "finalResult",
+        "props": {
+          "instruction": "标注已完成。",
+          "canReset": true,
+          "resetBtn": {
+            "text": "清空并重新标注",
+            "go": "start",
+            "style": "outline-danger"
+          },
+          "cancelBtn": {
+            "text": "继续增加标注",
+            "go": "start",
+            "style": "outline-danger"
+          },
+          "nextBtn": {
+            "text": "下一条",
+            "style": "outline-primary"
+          }
+        }
+      },
+      "start": {
+        "ref": "start",
+        "name": "开始",
+        "mode": "selectValue",
+        "props": {
+          "instruction": "这段话符合下述哪种情形？",
+          "optionBtns": [
+            {
+              "text": "该段落不表达空间方位义/复杂难懂/不完整",
+              "data": {
+                "label": "otherErrorNonSpatial",
+                "isDropping": true,
+                "desc": "该段落不表达空间方位义/复杂难懂/不完整"
+              },
+              "go": "end",
+              "style": "outline-dark"
+            },
+            {
+              "text": "该段落存在错别字或符号错误",
+              "go": "handleErrorString",
+              "style": "outline-dark"
+            },
+            {
+              "text": "红色词（方位词）不表达空间方位义",
+              "go": "handleErrorSpF",
+              "style": "outline-dark"
+            },
+            {
+              "text": "橙色词（趋向动词）不是表达空间方位义的趋向动词",
+              "go": "handleErrorDVerb",
+              "style": "outline-dark"
+            },
+            {
+              "text": "高亮词存在分词错误",
+              "go": "handleErrorSeg",
+              "style": "outline-dark"
+            },
+            {
+              "text": "无上述问题",
+              "data": {
+                "label": "fine",
+                "desc": "这段话不存在上述问题"
+              },
+              "go": "end",
+              "style": "outline-primary"
+            }
+          ]
+        }
+      },
+      "handleErrorSpF": {
+        "ref": "handleErrorSpF",
+        "name": "处理不合适的方位词",
+        "mode": "text",
+        "props": {
+          "selectInstruction": "请在文中划选非空间义的方位词",
+          "selectedTitle": "当前选中了：",
+          "instruction": "（请勿填写下面的文本框，直接确定即可）",
+          "data": {
+            "label": "otherErrorSpF",
+            "desc": "是非空间义的方位词",
+            "on": [],
+            "withText": " "
+          },
+          "okBtn": {
+            "text": "确定",
+            "go": "end",
+            "style": "success"
+          },
+          "cancelBtn": {
+            "text": "取消",
+            "go": "start",
+            "style": "light"
+          }
+        }
+      },
+      "handleErrorDVerb": {
+        "ref": "handleErrorDVerb",
+        "name": "处理不合适的趋向动词",
+        "mode": "text",
+        "props": {
+          "selectInstruction": "请在文中划选存在问题的词",
+          "selectedTitle": "当前选中了：",
+          "instruction": "（请勿填写下面的文本框，直接确定即可）",
+          "data": {
+            "label": "otherErrorDVerb",
+            "desc": "是不合适的趋向动词",
+            "on": [],
+            "withText": " "
+          },
+          "okBtn": {
+            "text": "确定",
+            "go": "end",
+            "style": "success"
+          },
+          "cancelBtn": {
+            "text": "取消",
+            "go": "start",
+            "style": "light"
+          }
+        }
+      },
+      "handleErrorString": {
+        "ref": "handleErrorString",
+        "name": "处理错错误字符",
+        "mode": "text",
+        "props": {
+          "selectInstruction": "请在文中划选出错的字符串；忽略分词错误",
+          "selectedTitle": "当前选中了：",
+          "instruction": "选中的部分应该修改为：",
+          "data": {
+            "label": "otherErrorString",
+            "desc": "有错，应改为：",
+            "on": [],
+            "withText": ""
+          },
+          "okBtn": {
+            "text": "确定",
+            "go": "end",
+            "style": "success"
+          },
+          "cancelBtn": {
+            "text": "取消",
+            "go": "start",
+            "style": "light"
+          }
+        }
+      },
+      "handleErrorSeg": {
+        "ref": "handleErrorSeg",
+        "name": "处理分词错误",
+        "mode": "text",
+        "props": {
+          "selectInstruction": "请在文中划选出出现分词错误的片段",
+          "selectedTitle": "当前选中了：",
+          "instruction": "（请勿填写下面的文本框，直接确定即可）",
+          "data": {
+            "label": "otherErrorSeg",
+            "desc": "存在分词错误",
+            "on": [],
+            "withText": " "
+          },
+          "okBtn": {
+            "text": "确定",
+            "go": "end",
+            "style": "success"
+          },
+          "cancelBtn": {
+            "text": "取消",
+            "go": "start",
+            "style": "light"
+          }
+        }
+      },
+      "handleOther": {
+        "ref": "handleOther",
+        "name": "处理其他原因",
+        "mode": "text",
+        "props": {
+          "selectInstruction": "若涉及具体片段，请在文中划选",
+          "canSkipSelection": true,
+          "selectedTitle": "当前选中了：",
+          "instruction": "请填写具体问题：",
+          "data": {
+            "label": "otherError",
+            "desc": "存在问题：",
+            "on": [],
+            "withText": ""
+          },
+          "okBtn": {
+            "text": "确定",
+            "go": "end",
+            "style": "success"
+          },
+          "cancelBtn": {
+            "text": "取消",
+            "go": "start",
+            "style": "light"
+          }
+        }
+      }
+    }
+  },
+  "第1期": {
+    "startStep": "start",
+    "endStep": "end",
+    "steps": {
+      "end": {
+        "ref": "end",
+        "name": "标注结果",
+        "mode": "finalResult",
+        "props": {
+          "instruction": "标注已完成。",
+          "canReset": true,
+          "resetBtn": {
+            "text": "清空并重新标注",
+            "go": "start",
+            "style": "outline-danger"
+          },
+          "nextBtn": {
+            "text": "下一条",
+            "style": "outline-primary"
+          },
+          "__cancelBtn": {
+            "text": "返回并补充标注",
+            "go": "start",
+            "style": "outline-secondary"
+          }
+        }
+      },
+      "start": {
+        "ref": "start",
+        "name": "评估材料的空间关系",
+        "mode": "selectValue",
+        "props": {
+          "instruction": "这段话中的空间关系__________。",
+          "optionBtns": [
+            {
+              "text": "完全正常",
+              "data": {
+                "label": "fine",
+                "desc": "这段话中的空间信息完全正常"
+              },
+              "go": "end",
+              "style": "outline-primary"
+            },
+            {
+              "text": "尚能说通",
+              "data": {
+                "label": "someFine",
+                "desc": "这段话中的空间信息尚能说通"
+              },
+              "go": "end",
+              "style": "outline-primary"
+            },
+            {
+              "text": "比较牵强",
+              "data": {
+                "label": "someBad",
+                "desc": "这段话中的空间信息比较牵强"
+              },
+              "go": "end",
+              "style": "outline-primary"
+            },
+            {
+              "text": "显然异常",
+              "data": {
+                "label": "bad",
+                "desc": "这段话中的空间信息显然异常"
+              },
+              "go": "end",
+              "style": "outline-primary"
+            },
+            {
+              "text": "其他",
+              "data": {
+                "isDropping": true,
+                "label": "hardToJudge",
+                "desc": "其他情况"
+              },
+              "go": "end",
+              "style": "outline-dark"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
