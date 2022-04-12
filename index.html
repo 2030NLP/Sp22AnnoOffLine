@@ -159,7 +159,7 @@
             </div>
             <!-- 替换后文本区 结束 -->
             <!-- 替换前原文区 开始 -->
-            <div class="row my-1 material-area" id="material-origin" :data-show="ctrl.showOrigin" v-show="ctrl.showOrigin">
+            <div class="row my-1 material-area" id="material-origin" :data-show="ctrl.showOrigin||ctrl?.currentWorker=='admin'" v-show="ctrl.showOrigin">
               <p>
                 <span
                   v-for="token in example?.material?.tokenList"
