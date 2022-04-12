@@ -133,7 +133,7 @@
           <!-- 内容区 开始 -->
           <div class="col col-12 col-lg-7 my-1">
             <!-- 替换后文本区 开始 -->
-            <div class="row my-1 material-area" id="material-replaced">
+            <div class="row my-1 material-area" id="material-replaced" :class="{admin:ctrl?.currentWorker=='admin'}">
               <p>
                 <span
                   v-for="token in example?.material?.tokenList"
@@ -159,7 +159,7 @@
             </div>
             <!-- 替换后文本区 结束 -->
             <!-- 替换前原文区 开始 -->
-            <div class="row my-1 material-area" id="material-origin" :data-show="ctrl.showOrigin||ctrl?.currentWorker=='admin'" v-show="ctrl.showOrigin">
+            <div class="row my-1 material-area" id="material-origin" :data-show="ctrl.showOrigin||ctrl?.currentWorker=='admin'" v-show="ctrl.showOrigin||ctrl?.currentWorker=='admin'">
               <p>
                 <span
                   v-for="token in example?.material?.tokenList"
