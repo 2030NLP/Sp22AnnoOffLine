@@ -154,7 +154,7 @@
                   @mouseenter="onMouseEnter(token)"
                   @mouseout="onMouseOut(token)"
                   @mouseup="onMouseUp(token)"
-                >{{ token?.replaced ? token?.to?.word : token.word }}<!-- <sub>{{ token.idx }}</sub> --></span>
+                >{{ token?.to?.word ?? token.word }}<!-- <sub>{{ token.idx }}</sub> --></span>
               </p>
             </div>
             <!-- 替换后文本区 结束 -->
